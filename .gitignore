@@ -1,0 +1,10 @@
+#ignore pdfs:
+*.pdf
+#ignore orna file
+JobTalkPreOrna1.tex
+#ignore otehr tex types:
+*.nav
+*.aux
+*.out
+*.snm
+*.toc
