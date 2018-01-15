@@ -1,0 +1,142 @@
+
+\begin{frame}
+\frametitle{Automated Verification - Traditional Approach}
+\only<1>{\includegraphics[page=1, scale=0.4]{graphics/MC}}
+\only<2>{\includegraphics[page=2, scale=0.4]{graphics/MC}}
+\end{frame}
+
+\begin{frame}
+\frametitle{Automated Verification - Example}
+\only<1-4>{\includegraphics[page=1, scale=1]{graphics/reqGrantSys}}
+\only<5-7>{\includegraphics[page=2, scale=1]{graphics/reqGrantSys}}
+\onslide<+->
+\onslide<+->
+
+Property: Every request is eventually followed by a grant.\\
+\onslide<+->
+In {\em Linear Temporal Logic} (LTL):\\
+ $\Alw({req}\to \Ev\ grant)$. 
+\only<4>{\cmark}
+\only<6-7>{\xmark}
+
+\onslide<7>{Counterexample: $\emc{darkgreen}{1,2,3,3,3^\omega}$}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Automated Verification - Success Stories}
+\begin{itemize}
+\item \emc{red}{Turing Awards}:
+\begin{itemize}
+\item[-] \emph{A. Pnueli}, 1996. For introducing temporal logic.
+\item[-] \emph{E.M. Clarke, E.A. Emerson}, and \emph{J. Sifakis}, 2007.\\ For developing model checking.
+\end{itemize} 
+\item \emc{red}{Kanellakis Theory and Practice Awards}:
+\begin{itemize}
+\item[-] \emph{R. Bryant, E.M. Clarke, E.A. Emerson}, and \emph{K.L. McMillan}, 1998. For symbolic model checking.
+\item[-] \emph{G. Holzmann, R. Kurshan, M. Vardi}, and \emph{P. Wolper}, 2005.\\ For techniques in formal verification.
+\end{itemize}
+\item \emc{red}{ACM software award}: 
+\begin{itemize}
+\item[-] \emph{G. Holzmann}, 2001. For SPIN model checker.
+\end{itemize}
+\item Used extensively in practice: 
+\item[] \includegraphics[scale=0.3]{graphics/hardware}
+\item[] \includegraphics[scale=0.4]{graphics/software}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Automated Verification - Limitations}
+\begin{itemize}
+\item[1. \xmark] \alt<1>{Systems must be concrete and finite state.}{\textbf{Systems must be concrete and finite state.}}
+\begin{itemize}
+\item[]
+\end{itemize}
+\item[2. \xmark] Specifications are Boolean - not rich enough.
+\begin{itemize}
+\item[]
+\end{itemize}
+\item[3. \xmark] What happens with ``yes'' instances?
+\begin{itemize}
+\item[] 
+\end{itemize}
+\end{itemize}
+\pause
+\end{frame}
+
+\begin{frame}
+\frametitle{Systems must be concrete and finite state}
+\begin{itemize}[<+->]
+\item Chip with 64 bits of memory \onslide<+->{$\to$ \emc{red}{$2^{64}$} states! }
+\item Code with a counter \onslide<4->{$\to$ \emc{red}{Infinitely many} states!}
+	\onslide<3->{\begin{beamerboxesrounded}[upper=uppercolblue,lower=lowercolblue,shadow=true, width=7cm]{Collatz$(n)$}
+		\texttt{while} $n\neq 1$\\
+		\hspace*{.5cm} 	\texttt{if} $n$ is even, \texttt{then} $n\leftarrow n/2$\\
+		\hspace*{.5cm} 	\texttt{else if} $n$ is odd, \texttt{then} $n\leftarrow 3n+1$
+	\end{beamerboxesrounded}}
+\onslide<5->
+\item Robot in an arena \onslide<6->{$\to$ \emc{red}{Continuous} state space!}
+
+\includegraphics[scale=0.3]{graphics/RobotPlan.png}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Automated Verification - Limitations}
+\begin{itemize}
+\item[1. \xmark] Systems must be concrete and finite state.
+\begin{itemize}
+\item[]
+\end{itemize}
+\item[2. \xmark] \alt<1>{Specifications are Boolean - not rich enough.}{\textbf{Specifications are Boolean - not rich enough.}}
+\begin{itemize}
+\item[]
+\end{itemize}
+\item[3. \xmark] What happens with ``yes'' instances?
+\begin{itemize}
+\item[] 
+\end{itemize}
+\end{itemize}
+\pause
+\end{frame}
+
+\begin{frame}
+\frametitle{Specifications are Boolean - not rich enough}
+\begin{itemize}
+\item Boolean properties are not expressive enough for today's systems:
+\begin{itemize}
+\item \emc{red}{How many} packages are lost?
+\item What is the \emc{red}{worst-case waiting time} for a lock?
+\item \emc{red}{Minimize} the average energy consumption.
+\item Stay as \emc{red}{far away} as possible from ``bad'' regions.
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Automated Verification - Limitations}
+\begin{itemize}
+\item[1. \xmark] Systems must be concrete and finite state.
+\begin{itemize}
+\item[]
+\end{itemize}
+\item[2. \xmark] Specifications are Boolean - not rich enough.
+\begin{itemize}
+\item[]
+\end{itemize}
+\item[3. \xmark] \alt<1>{What happens with ``yes'' instances?}{\textbf{What happens with ``yes'' instances?}}
+\begin{itemize}
+\item[] 
+\end{itemize}
+\end{itemize}
+\pause
+\pause
+\begin{tikzpicture}[overlay]
+\node at ($(current page.south west)+(0.8,1.2)$) [anchor=north west] {\includegraphics[scale=0.39]{graphics/grandparents.jpg}};
+\node at ($(current page.south west)+(5.5,0.6)$) [anchor=north west, align=left] {\emph{``Convince not only the designer,} \\ \hspace*{0.1cm} \emph{but the designer's grandparents''}\\ \hspace*{3.1cm}- J. Ouaknine
+ };
+\end{tikzpicture}
+
+\end{frame}

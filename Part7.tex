@@ -1,0 +1,69 @@
+\begin{frame}
+\frametitle{Talk Outline}
+\begin{itemize}
+	\item \emc{gray}{Non-Boolean Reasoning:}
+	\begin{itemize} 
+		\item \emc{gray}{Reasoning about Quality - quantitative specifications.}
+		\item \emc{gray}{Regular Sensing - a new complexity measure for $\omega$-regular languages.}
+	\end{itemize}
+	\item Linear Dynamical Systems: 
+	\begin{itemize}
+	\item \emc{gray}{The Polytope Collision Problem - input quantification in infinite-state systems.}
+	\item[\itemnow] \textbf{\emc{red}{Semialgebraic invariant synthesis - certifiable algorithms for orbit problems.}}
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Semialgebraic Invariants for Halfspace Reachability}
+	Recall:
+	\begin{beamerboxesrounded}[upper=lowercoldarkred,lower=uppercoldarkred,shadow=true]
+		{Given a vector $\colInit{\vec{x}}\in \QQ^d$, a halfspace $\colTarget{V}$ and a matrix $A\in \QQ^{d\times d}$, decide whether there exists $n\in \NN$ such that $A^n\colInit{x}\in \colTarget{V}$.}
+			Decidability status is open. Hard in general. 
+	\end{beamerboxesrounded}
+	\vspace*{-18pt}
+	\onslide<+->
+	\begin{itemize}
+		\item<+-> For ``yes'' instances - simple certificate ($n\in \NN$).
+		\item<+-> Can we say something about ``no'' instances? 
+		\item<+-> Idea: find a set $\Inv$ such that:
+		\begin{itemize}
+			\item $\Inv$ contains \alt<1-5>{the orbit $\set{A^n \colInit{\vec{x}}:n\in \NN}$}{$\colInit{\vec{x}}$}.
+			\item $\Inv$ is disjoint from the halfspace $\colTarget{V}$.
+			\item $\Inv$ is ``simple'' to describe.
+			\item<+-> $\Inv$ is invariant under $A$: $A\Inv\subseteq \Inv$.
+		\end{itemize} 
+	\end{itemize}
+	\onslide<+->	
+	\onslide<+->
+	\begin{beamerboxesrounded}[upper=uppercolgreen,lower=lowercolgreen,shadow=true]{Theorem [S. Almagor, D. Chistikov, J. Ouaknine, J. Worrell]:}
+		{Given a vector $\colInit{\vec{x}}$, a halfspace $\colTarget{V}$ and a diagonalizable matrix $A$, we can compute $\Inv$, if it exists.}
+	\end{beamerboxesrounded}	
+\end{frame}
+
+\begin{frame}
+\frametitle{Semialgebraic Invariants - Proof Sketch (1)}
+
+\begin{tikzpicture}[overlay]
+	\only<1->{\node at ($(current page.south west)+(-9.6,2)+(10,1)$) [anchor=north west]{Consider the orbit of $\colInit{\vec{x}}$, we can extract a ``cone'' out of it:};}
+	\only<2>{\node at ($(current page.south west)+(-8.8,1.5)+(10,1)$) [anchor=north west]{\includegraphics[scale=0.3]{Cone/Points.png}};}
+	\only<3>{\node at ($(current page.south west)+(-8,1.7)+(10,1)$) [anchor=north west]{\includegraphics[scale=0.3]{Cone/Lines.png}};}
+	\only<4>{\node at ($(current page.south west)+(-8.6,1.3)+(10,1)$) [anchor=north west]{\includegraphics[scale=0.3]{Cone/Cone.png}};}
+\end{tikzpicture} 
+
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Semialgebraic Invariants - Proof Sketch (2)}
+\begin{itemize}[<+->]
+\item We prove that every semialgebraic invariant must contain the entire cone from some ``height''.
+\item Thus, it is enough to check if the cone intersects the halfspace infinitely often.
+\item If the cone is semialgebraic - this can be done using decidability of the FO theory of the reals.
+\end{itemize}
+\includegraphics[scale=0.15]{Cone/Cone.png}
+\begin{itemize}[<+->]
+\item Problem: the cone might not be semialgebraic.
+\item Solution: work with a ``fat'' cone that is semialgebraic.
+\end{itemize}
+\end{frame}

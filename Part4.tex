@@ -1,0 +1,87 @@
+
+\begin{frame}
+\frametitle{Talk Outline}
+\begin{itemize}
+\item Non-Boolean Reasoning:
+\begin{itemize} 
+    \item \emc{gray}{Reasoning about Quality - quantitative specifications.}
+	\item[\itemnow] \textbf{\emc{red}{Regular Sensing - a new complexity measure for $\omega$-regular languages.}}
+\end{itemize}
+\item Linear Dynamical Systems:
+\begin{itemize}
+\item[\itemlater] The Polytope Collision Problem - input quantification in infinite-state systems.
+\item[\itemlater] Semialgebraic invariant synthesis - certifiable algorithms for orbit problems.
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Regular Sensing}
+	\begin{itemize}[<+->]
+		\item A new \emc{darkgreen}{complexity} measure for regular languages.
+		\item Consider an alphabet $2^P$ for some finite set $P$
+		\item Consider a DFA $\A$ for a regular language $L$ over $2^P$.
+		\item Reading each signal in $P$ requires activating a sensor.
+		\item The complexity $\emc{sensec}{\scost(\A)}$ of $\A$ can be measured by the \emc{limitc}{expected} number of sensors $\A$ uses.
+		\item The complexity of a language $L$ is $\emc{sensec}{\scost(L)}=\inf\set{\emc{sensec}{\scost(\A)}: L(\A)=L}$.
+		
+		\begin{beamerboxesrounded}[upper=uppercollem,lower=lowercollem,shadow=true]{Main problem:}
+					For a language/specification $L$, compute $\emc{sensec}{\scost(L)}$.
+				\end{beamerboxesrounded}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Sensing Example (1)}
+	Take $P=\set{a,b}$.
+	\only<1>{\includegraphics[page=1]{graphics/SensingPics}} %\input{a3v0}}
+	\only<2-3>{\includegraphics[page=2]{graphics/SensingPics}} %\input{a3v1}}
+	\only<4-5>{\includegraphics[page=4]{graphics/SensingPics}} %\input{a3v2}}
+	\only<6>{\includegraphics[page=6]{graphics/SensingPics.pdf}} %\includegraphics[page=2]{SensingPics.pdf}} %\input{a3v3}}
+	\only<7>{\includegraphics[page=7]{graphics/SensingPics.pdf}} %\input{a3v4}}
+	\onslide<+->
+	\onslide<+->
+	\begin{itemize}
+		\item<+-> Reading $b$ in $q_0$ does not affect the transition. Reading $a$ does affect it. Thus, $\sen(q_0)=\set{a}$ and \emc{sensec}{$\scost(q_0)=1$}. \onslide<+->
+		\item<+->  $\sen(q_1)=\set{a,b}$, thus \emc{sensec}{$\scost(q_1)=2$}. 
+		\item<+->  $\sen(q_2)=\set{a}$, thus \emc{sensec}{$\scost(q_2)=1$}. 
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Sensing Example (2)}
+	\only<1>{\includegraphics[page=16]{graphics/SensingPics.pdf}} %\input{a3v5}}
+	\only<2>{\includegraphics[page=17]{graphics/SensingPics.pdf}} %\input{a3v6}}
+	\only<3->{\includegraphics[page=18]{graphics/SensingPics.pdf}} %\input{a3v7}}
+	\onslide<+->
+	\begin{itemize}[<+->]
+		\item Each transition is given \emc{probc}{probability} $\frac{1}{|2^P|}$.
+		\item The \emc{limitc}{limiting distribution} of $\A$.
+		\item $\emc{sensec}{\scost(\A)}=\emc{limitc}{\frac25} \cdot \emc{sensec}{1}+\emc{limitc}{\frac25}\cdot \emc{sensec}{2}+\emc{limitc}{\frac15}\cdot \emc{sensec}{1}=\frac75$.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Regular Sensing - Results}
+	\begin{itemize}
+		\item<+-> For \emc{blue}{finite words} - minimal \emc{sensec}{sensing} is attained by the (unique) minimal-\emc{orange}{size} DFA.
+		\item<+-> For \emc{purple}{infinite words} - minimal \emc{sensec}{sensing} may be attained only as a \emc{limitc}{limit} of a sequence of automata.
+		\item<+-> For \emc{purple}{infinite words} - nevertheless, minimal \emc{sensec}{sensing} is computable in polynomial time.
+		\item<+-> Extends to the setting of open systems (synthesis).
+		\item<+-> Applications in Monitoring.
+		\item<+-> Based on the following works:\\
+		{\footnotesize S. Almagor, D. Kuperberg, and O. Kupferman
+		\begin{itemize}
+			\item[-] {\footnotesize Regular Sensing \textbf{FSTTCS 2014}.}
+			\item[-] {\footnotesize The Sensing Cost of
+				Monitoring and Synthesis \textbf{FSTTCS 2015}.}
+			\item[-] {\footnotesize Sensing as a Complexity
+				Measure \textbf{DCFS 2017}.}
+		\end{itemize}
+		{\footnotesize S. Almagor, O. Kupferman, and Y. Velner
+		\begin{itemize}
+			\item[-] {\footnotesize Minimizing Expected Cost	Under Hard Boolean Constraints with Applications to Quantitative Synthesis \textbf{CONCUR 2016}}	
+		\end{itemize}}}
+		
+	\end{itemize}
+\end{frame}

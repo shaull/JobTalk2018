@@ -1,0 +1,109 @@
+\begin{frame}
+	\frametitle{Reasoning about Quality(1)}
+	Different ways of satisfying a specification should have different levels of quality.
+	
+	\onslide<2->{Consider the specification ``breakfast'':}
+		\begin{columns}
+			\begin{column}{0.45\textwidth}
+				\begin{overprint}	
+					\onslide<3| handout:0>
+					\begin{figure}[tbp]
+						\includegraphics[ height=3.5cm]{graphics/egg1.pdf}
+					\end{figure}
+					
+					\onslide<4| handout:0>
+					\begin{figure}[tbp]
+						\includegraphics[ height=3.5cm]{graphics/egg2.pdf}
+					\end{figure}
+					
+					\onslide<5| handout:0>
+					\begin{figure}[tbp]
+						\includegraphics[ height=3.5cm]{graphics/egg3.pdf}
+					\end{figure}
+				\end{overprint}	
+			\end{column}
+			\begin{column}{0.45\textwidth}
+				\begin{overprint}
+					
+					\onslide<3| handout:0>
+					Poor quality.		
+					\onslide<4| handout:0>
+					Better quality.
+					\onslide<5| handout:0>
+					Om nom nom!
+					
+				\end{overprint}	
+			\end{column}
+		\end{columns}
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Reasoning about Quality (2)}
+	\begin{itemize}
+		\item<+-> We add \emc{darkgreen}{quality} operators to LTL (e.g., $\min$, $\max$, $\oplus_\lambda$, $\factorU_\lambda$),
+		\item<+-> as well as \emc{darkgreen}{discounting} operators.
+		\item<+-> A formula $\phi$ has a satisfaction \emc{darkgreen}{value} in $[0,1]$.
+		\item<+-> Intuitively, the higher the value is, the ``more satisfied'' the formula is.
+		\item<+-> The system remains Boolean.
+		\uncover<+->{
+		\item Based on the following works:\\
+		 {\footnotesize S. Almagor, U. Boker, and O. Kupferman}
+		 
+		\begin{itemize}
+			\item[-] {\footnotesize Formalizing and Reasoning About Quality \textbf{ICALP 2013}.}
+			\item[-] {\footnotesize Discounting in LTL \textbf{TACAS 2014}.}
+			\item[-] {\footnotesize Formally Reasoning About Quality \textbf{J.ACM 2016}.}			
+		\end{itemize}	}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Example - Propositional Quality}
+	\begin{itemize}[<+->]
+		\item Consider a system that grants locks for a data structure.   
+		\item If we get a \emc{blue}{write lock}, we are  happy (value {\color{blue} $1$}).~\includegraphics[height=12pt]{graphics/smileyHappy2.png}
+		\item If we get a \emc{darkgreen}{read lock}, we are ambivalent (value {\color{darkgreen}$\frac{1}{2}$}).~\includegraphics[ height=12pt]{graphics/smileyAmb2.png}
+		\item Otherwise we are not happy (value 0).~\includegraphics[height=12pt]{graphics/smileySad2.png}
+		\item Formulated as:
+		$$\Alw \Big(req\to \Next \emc{blue}{write} \vee \emc{darkgreen}{\factorU_{\frac12} \Next read})$$
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Example - Discounting the Future}
+	\begin{itemize}[<+->]
+		\item Consider a system that grants requests. A grant should be given \emc{blue}{as soon as possible}.
+		\item We penalize the satisfaction \emc{darkgreen}{value} according to the \emc{red}{time} it takes for a grant to be given.
+		\item We formulate the \emc{darkgreen}{quality} of the system as
+		$$\Alw(req\to \emc{darkgreen}{\Ev_{0.9}} grant)$$
+		\item[-] $\emc{darkgreen}{\Ev_{0.9}}$ means that if a grant is received after \emc{red}{$k$} steps, the satisfaction value is $\emc{darkgreen}{0.9}^{\emc{red}{k}}$,\\
+		\item[-] $\Alw$ means that we take the minimal satisfaction value among prefixes.
+		%\item $\emc{blue}{(req,(\neg grant)^3,grant)(req,(\neg grant)^2,grant)^\omega}$ gets value $\emc{blue}{0.9^3}$. 
+		\item $\emc{blue}{(req,\emptyset,\emptyset,\emptyset,grant)(req,\emptyset,\emptyset,grant)^\omega}$ gets value $\emc{blue}{0.9^3}$. 
+		%\item $\emc{red}{(req,(\neg grant^i),grant)_{i=0}^\infty}$ gets value $\emc{red}{0}$.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Reasoning about Quality (3)}
+	Results [\emph{ICALP 2013, TACAS 2014, and J.ACM 2016}]:
+	\begin{itemize}[<+->]
+		\item $LTL[{\cal F}]$ - $LTL$ augmented with \emc{darkgreen}{quality operators}:
+			\begin{itemize}
+				\item Model Checking and Satisfiability are PSPACE-Complete.
+				\item Synthesis is 2EXPTIME-Complete.
+			\end{itemize}
+		\item $LTL[{\cal D}]$ - $LTL$ augmented with \emc{darkgreen}{discounting operators}:
+			\begin{itemize}
+				\item Strict-threshold Model Checking is PSPACE-Complete. (Requires PosSLP$\in$PSPACE).
+				\item Non-strict threshold - open.
+				\item Synthesis - open (can do approximate synthesis).
+			\end{itemize}		
+		\item $LTL[{\cal F+D}]$
+		\begin{itemize}
+			\item Already Satisfiability is \emc{red}{undecidable}.
+			\item Some decidable fragments are known.
+		\end{itemize}
+	\end{itemize}
+\end{frame}

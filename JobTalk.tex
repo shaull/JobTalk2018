@@ -1,0 +1,215 @@
+\documentclass{beamer}
+\usepackage{amssymb}
+\usepackage{pifont}
+\usepackage{amsmath}
+\usepackage{wasysym}
+\usepackage{xcolor}
+\usepackage{bbm}
+\usepackage{graphicx}
+\usepackage{varwidth}
+\usepackage{animate}
+\usepackage{tikz}
+\usetikzlibrary{positioning,calc}
+
+\newcommand{\set}[1]{\left\{#1\right\}}
+\newcommand{\NN}{{\mathbbm{N}}}
+\newcommand{\ZZ}{{\mathbbm{Z}}}
+\newcommand{\RR}{{\mathbbm{R}}}
+\newcommand{\CC}{{\mathbbm{C}}}
+\newcommand{\QQ}{{\mathbbm{Q}}}
+\renewcommand{\AA}{{\mathbbm{A}}}
+
+
+\newcommand{\B}{{\cal B}}
+\newcommand{\A}{{\cal A}}
+\renewcommand{\P}{{\cal P}}
+\newcommand{\Q}{{\cal Q}}
+\newcommand{\T}{{\cal T}}
+\newcommand{\Inv}{{\cal I}}
+
+\newcommand{\Next}{\mathsf{X}}
+\newcommand{\Ev}{\mathsf{F}}
+\newcommand{\Alw}{\mathsf{G}}
+\newcommand{\Until}{\mathsf{U}}
+\newcommand{\Release}{\mathsf{R}}
+
+\renewcommand{\phi}{\varphi}
+
+\newcommand{\factorU}{\triangledown}
+
+\newcommand{\sen}{{\it sensed}}
+\newcommand{\scost}{{\it scost}}
+
+\newcommand{\stam}[1]{}
+
+%COLORS
+
+\definecolor{darkgreen}{RGB}{20,149,50}
+\definecolor{darkblue}{RGB}{20,50,149}
+\definecolor{orange}{RGB}{200,100,0}
+\definecolor{lemmacol}{RGB}{30,140,80}
+\definecolor{bgc}{RGB}{255,255,255}
+
+\definecolor{specc}{RGB}{20,149,50}
+
+\definecolor{asc}{RGB}{117,50,255}
+\definecolor{wc}{RGB}{0,220,255}
+\definecolor{stochc}{RGB}{250,0,133}
+
+\definecolor{sensec}{RGB}{20,50,170}
+\definecolor{envc}{RGB}{149,50,20}
+\definecolor{probc}{RGB}{50,170,130}
+\definecolor{targetc}{RGB}{20,149,50}
+\definecolor{initc}{RGB}{20,50,149}
+\definecolor{lcostc}{RGB}{65,140,160}
+\definecolor{wcostc}{RGB}{140,65,160}
+
+\newcommand{\emc}[2]{{\color{#1} #2}}
+
+\newcommand{\cmark}{{\color{darkgreen} \ding{51}}}%
+\newcommand{\xmark}{{\color{red}  \ding{55}}}%
+
+\newcommand{\colInit}[1]{\emc{initc}{#1}}
+\newcommand{\colTarget}[1]{\emc{targetc}{#1}}
+
+\newcommand{\conj}[1]{{\overline{#1}}}
+\newcommand{\norm}[1]{{\left\lVert#1\right\rVert}}
+
+\newcommand{\relBow}{\mathrel{\bowtie}}
+
+\newcommand{\itemnow}{{\raisebox{-4pt}{\includegraphics[scale=0.5]{graphics/Now1.png}}}}
+\newcommand{\itemlater}{{\raisebox{-6pt}{\includegraphics[scale=0.47]{graphics/Later1.png}}}}
+
+%-- beamer funcs --
+\newcommand{\semitransp}[2][35]{\color{fg!#1}#2}
+\newenvironment<>{grayenv}{%
+  \color#1{gray}}{}
+
+\def\colorize<#1>{%
+  \temporal<#1>{\color{black!50}}{\color{black}}{\color{black!50}}}
+
+\setbeamercolor{uppercolgreen}{fg=black,bg=green!45}%
+\setbeamercolor{lowercolgreen}{fg=black,bg=green!5}%
+\setbeamercolor{uppercolred}{fg=black,bg=red!35}% 
+\setbeamercolor{lowercolred}{fg=black,bg=red!10}% 
+\setbeamercolor{uppercoldarkred}{fg=black,bg=red!55}% 
+\setbeamercolor{lowercoldarkred}{fg=black,bg=red!20}% 
+\setbeamercolor{uppercolblue}{fg=white,bg=blue!35}% 
+\setbeamercolor{lowercolblue}{fg=black,bg=blue!10}% 
+\setbeamercolor{uppercollem}{fg=white,bg=lemmacol!60}% 
+\setbeamercolor{lowercollem}{fg=black,bg=lemmacol!10}% 
+
+
+\definecolor{darkgreen}{RGB}{20,149,50}
+\definecolor{orange}{RGB}{200,100,0}
+\definecolor{lemmacol}{RGB}{30,140,80}
+\definecolor{proofcol}{RGB}{30,140,80}
+\definecolor{bgc}{RGB}{255,255,255}
+\definecolor{light}{RGB}{180,180,180}
+
+
+
+\definecolor{sizec}{RGB}{20,149,50}
+\definecolor{sensec}{RGB}{20,50,170}
+\definecolor{limitc}{RGB}{149,50,20}
+\definecolor{probc}{RGB}{50,170,130}
+\definecolor{ic}{RGB}{0,88,204}
+\definecolor{oc}{RGB}{204,116,0}
+
+
+\setbeamercolor{background canvas}{bg=bgc}
+
+%-- end of funcs  --
+
+
+
+\mode<presentation>
+{ \usetheme{Singapore} } 
+\setbeamertemplate{footline}[frame number]
+\beamertemplatenavigationsymbolsempty
+%\setbeamertemplate{sections/subsections in toc}[default]
+
+%\setbeamertemplate{background}{\tikz[overlay, remember picture, help lines]{
+%    \foreach \x in {0,...,12} \path (current page.south west) +(\x,8.25) node {\small$\x$};
+%    \foreach \y in {0,...,9} \path (current page.south west) +(12.5,\y) node {\small$\y$};
+%    \foreach \x in {0,0.5,...,12.5} \draw (current page.south west) ++(\x,0) -- +(0,9.6);
+%    \foreach \y in {0,0.5,...,9.5} \draw (current page.south west) ++(0,\y) -- +(12.8,0);
+%  }
+%}
+
+
+
+\title{Automated Verification of Infinite-State Systems}
+\subtitle{with Certifiable Algorithms}
+\author{Shaull Almagor}
+\institute{Oxford University}
+\date{2018}
+
+\begin{document}
+
+\setcounter{subsection}{1}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+
+
+\section{Model Checking}
+\stepcounter{subsection}
+\input{Part1.tex}
+
+\section{Beyond Boolean}
+\stepcounter{subsection}
+\input{Part2.tex}
+
+%\section{Reasoning about Quality}
+%\stepcounter{subsection}
+\input{Part3.tex}
+
+%\section{Sensing}
+%\stepcounter{subsection}
+\input{Part4.tex}
+
+\section{Linear Dynamical Systems}
+\stepcounter{subsection}
+\input{Part5.tex}
+
+
+\input{Part6.tex} %3DPCP
+
+\input{Part7.tex} %semialgebraic inv.
+
+
+\section{Summary}
+\stepcounter{subsection}
+
+\begin{frame}
+ \frametitle{Research Outlook}
+{\small
+\begin{itemize}[<+->]
+\item Formal methods need to be extended beyond the Boolean framework and beyond finite-state systems.
+\item We need to convince designers of correctness and incorrectness.
+\item Reasoning about infinite-state systems/quantitative specifications requires some structure (algebraic or other).
+\item Rich domains bring a variety of (cool) tools to formal methods.
+\item In a rich domain, it is (potentially) easier to provide certificates.
+\item We get a whole new set of challenges that are not combinatorial (unlike the traditional setting).
+\item Giving back to the community: formal methods may shed some light on open problems in other fields.
+\end{itemize}
+}
+\end{frame}
+
+
+ \begin{frame}
+ \frametitle{}
+ \begin{center}
+ {\Huge Thank You!}
+ 
+ \includegraphics[scale=0.5]{graphics/accident.png}
+ \end{center}
+ \end{frame}
+  
+ \end{document}
+ 
+
+ 

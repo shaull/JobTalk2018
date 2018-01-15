@@ -1,0 +1,199 @@
+\begin{frame}
+\frametitle{Talk Outline}
+\begin{itemize}
+\item \emc{gray}{Non-Boolean Reasoning:}
+\begin{itemize} 
+    \item \emc{gray}{Reasoning about Quality - quantitative specifications.}
+	\item \emc{gray}{Regular Sensing - a new complexity measure for $\omega$-regular languages.}
+\end{itemize}
+\item[\itemnow] \textbf{\emc{red}{Linear Dynamical Systems:}}
+\begin{itemize}
+\item[\itemlater] The Polytope Collision Problem - input quantification in infinite-state systems.
+\item[\itemlater] Semialgebraic invariant synthesis - certifiable algorithms for orbit problems.
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Linear Dynamical Systems}
+	\begin{itemize}
+		\item We consider a Linear Dynamical System:
+		\onslide<+->
+		\begin{itemize}[<+->]
+			\item Start with a vector $\colInit{\vec{x}}\in \RR^d$.
+			\item Progress by applying a matrix $A\in \RR^{d\times d}$.
+			\item Reason about the {\em Orbit} ${\cal O}=\set{A^n \colInit{\vec{x}}:n\in \NN}$.
+		\end{itemize}
+	\item<+-> Models an infinite state machine.\\
+	\hspace*{2.5cm}
+		\begin{beamerboxesrounded}[upper=lowercolblue,lower=lowercolblue,shadow=true, width=3cm]{}
+			\texttt{init} $\colInit{\vec{x}}$\\
+			\texttt{while}({\em condition})\\
+			\hspace*{0.5cm} $\colInit{\vec{x}}\leftarrow A\colInit{\vec{x}}$
+		\end{beamerboxesrounded}
+	\onslide<+->
+	\item Properties to consider:
+%	{\footnotesize 
+%			\onslide<+->
+%		\item[-] Vector-Reachability: Given a vector $\colTarget{\vec{y}}\in \RR^d$, $\exists n\in \NN$ s.t. $A^n \colInit{\vec{x}}=\colTarget{\vec{y}}$?
+%			\onslide<+->
+%		\item[-] Set-Reachability: Given a target set $\colTarget{T}\subseteq \RR^d$, $\exists n\in \NN$ s.t. $A^n \colInit{\vec{x}}\in \colTarget{T}$?
+%			\onslide<+->
+%		\item[-] (Non)Safety: Given sets $\colInit{S},\colTarget{T}\subseteq \RR^d$, $\exists \colInit{\vec{x}}\in \colInit{S}, \exists n\in \NN$ s.t.  $A^n \colInit{\vec{x}}\in \colTarget{T}$?
+%			\onslide<+->
+%		\item[-] Termination: Given sets $\colInit{S},\colTarget{T}\subseteq \RR^d$, $\forall \colInit{\vec{x}}\in \colInit{S}, \exists n\in \NN$ s.t.  $A^n \colInit{\vec{x}}\in \colTarget{T}$?
+%	}
+	{\footnotesize 
+		\setlength{\tabcolsep}{1pt}
+		\begin{tabular}{l l l l}
+		\onslide<+->
+		Vector-Reachability: & Given a vector $\colTarget{\vec{y}}\in \RR^d$, & &  $\exists n\in \NN$ s.t. $A^n \colInit{\vec{x}}=\colTarget{\vec{y}}$? \\ 
+		\onslide<+->
+		 Set-Reachability: & Given a set $\colTarget{T}\subseteq \RR^d$, & & $\exists n\in \NN$ s.t. $A^n \colInit{\vec{x}}\in \colTarget{T}$? \\ 
+		\onslide<+->		 
+		 (Non)Safety: & Given sets $\colInit{S},\colTarget{T}\subseteq \RR^d$, &  $\exists \colInit{\vec{x}}\in \colInit{S}$, & $\exists n\in \NN$ s.t.  $A^n \colInit{\vec{x}}\in \colTarget{T}$?\\
+		\onslide<+->		 
+		 Termination: & Given sets $\colInit{S},\colTarget{T}\subseteq \RR^d$, & $\forall \colInit{\vec{x}}\in \colInit{S},$ & $\exists n\in \NN$ s.t.  $A^n \colInit{\vec{x}}\in \colTarget{T}$?
+		\end{tabular} 
+	}	
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Orbit Problems - History}
+	\pause
+	\onslide<2->{
+		\begin{beamerboxesrounded}[upper=lowercolblue,lower=lowercolgreen,shadow=true]
+			{Given vectors $\colInit{\vec{x}}, \colTarget{\vec{y}}\in \QQ^d$ and a matrix $A\in \QQ^{d\times d}$, decide whether there exists $n\in \NN$ such that $A^n\colInit{\vec{x}}=\colTarget{\vec{y}}$.}
+			\onslide<3->{ 
+				Shown to be decidable in {\bf P} by Kannan and Lipton in [STOC 1980, JACM 1986].
+			}
+		\end{beamerboxesrounded}
+	}
+	\onslide<4->{
+		\begin{beamerboxesrounded}[upper=lowercolblue,lower=lowercolgreen,shadow=true]
+			{Given a vector $\colInit{\vec{x}}\in \QQ^d$, a halfspace $\colTarget{V}$ and a matrix $A\in \QQ^{d\times d}$, decide whether there exists $n\in \NN$ such that $A^n\colInit{\vec{x}}\in \colTarget{V}$.}
+			\onslide<7->{
+				Hard-open$^*$ in general. 				
+				Solvable when $\colTarget{V}$ has a low dimension. 
+				
+				[V. Chonev, J. Ouaknine, and J. Worrell. STOC 2013, J.ACM 2016]
+			}
+		\end{beamerboxesrounded}
+	}
+	\onslide<8->{
+		\begin{beamerboxesrounded}[upper=lowercolblue,lower=lowercolgreen,shadow=true]
+			{Given a vector $\colInit{\vec{x}}\in \QQ^d$, a polytope $\colTarget{\Q}$ and a matrix $A\in \QQ^{d\times d}$, decide whether there exists $n\in \NN$ such that $A^n\colInit{\vec{x}}\in \colTarget{\Q}$.}
+			\onslide<9->{
+				Hard-open$^*$ in general. 				
+				Solvable when $\colTarget{\Q}$ has dimension $\le 3$. 
+				
+				[V. Chonev, J. Ouaknine, and J. Worrell. SODA 2015]
+			}
+		\end{beamerboxesrounded}	
+	}
+	\only<5>{\begin{tikzpicture}[overlay]
+	\node at ($(current page.center)-(1,1)$) [anchor=center, rotate=10] {\includegraphics[scale=0.4]{graphics/newspaper.pdf}}; 
+	\end{tikzpicture} 	}	
+	\onslide<7->{\small * w.r.t. long-standing number-theoretic open problems (Diophantine approximation)}	
+	
+\end{frame}   
+
+\begin{frame}
+\frametitle{Orbits - What's the Big Deal? (I)} 
+\begin{itemize}[<+->]
+	\item Consider a matrix $A$ and a vector $\colInit{\vec{x}}$.
+	\item Assume $A$ is diagonalizable, then we can write 
+	\onslide<+->
+	$$A=P^{-1}\begin{pmatrix}
+	\lambda_1 & & \\
+	& \ddots &\\
+	& & \lambda_d
+	\end{pmatrix}P\ \text{ with } \lambda_i\in \CC.$$ 
+	\item Thus, every {\em coordinate} of $A^n\colInit{\vec{x}}$ is of the form
+	$$a_1\lambda^n_1+\ldots+a_d\lambda^n_d.$$
+	\item This is {\em dominated} by the maximal modulus $|\lambda_{\max}|$.
+	\item Smaller eigenvalues have an {\em exponentially decreasing} effect.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Orbits - What's the Big Deal? (II)}
+\begin{tikzpicture}[remember picture, overlay]
+\draw [->,thick] (current page.south west) +(6,0.3) -- +(6,8);
+\draw [->,thick] (current page.south west) +(0.3,4) -- +(12,4);	
+\pause
+\node at ($(current page.south west)+(2,7.5)$) {If $|\lambda_{\max}|>1$};   
+\pause
+\node at ($(current page.south west)+(4.8,3)$) {$\colInit{\vec{x}}$};
+\draw[fill] ($(current page.south west)+(5,3)$) circle [radius=0.06];
+\pause
+\node at ($(current page.south west)+(8.8,5)$) {$\colTarget{\vec{y}}$};
+\draw[fill] ($(current page.south west)+(9,5)$) circle [radius=0.06];
+\pause
+\draw[fill] ($(current page.south west)+(5.5,2.6)$) circle [radius=0.06];
+\pause
+\draw[fill] ($(current page.south west)+(6.3,2.3)$) circle [radius=0.06];
+\pause
+\draw[fill] ($(current page.south west)+(7,3)$) circle [radius=0.06];
+\pause
+\draw[fill] ($(current page.south west)+(6.8,4.2)$) circle [radius=0.06];
+\pause
+\draw[fill] ($(current page.south west)+(5.7,4.8)$) circle [radius=0.06];
+\pause
+\draw[fill] ($(current page.south west)+(4,4.1)$) circle [radius=0.06];
+\pause
+\draw[fill] ($(current page.south west)+(4.1,2)$) circle [radius=0.06];
+\pause
+\draw[fill] ($(current page.south west)+(6.5,1.5)$) circle [radius=0.06];
+\pause
+\draw[fill] ($(current page.south west)+(8.3,2.5)$) circle [radius=0.06];
+\pause
+\draw[fill] ($(current page.south west)+(9.7,5.2)$) circle [radius=0.06];
+\pause 	
+\node at ($(current page.south west)+(8.5,4)$) [anchor=north west] {\includegraphics[scale=0.5]{graphics/who.png}};
+\end{tikzpicture} 	
+\end{frame}
+
+\begin{frame}
+\frametitle{Orbits - What's the Big Deal? (III)}
+\begin{tikzpicture}[remember picture, overlay]
+\draw [->,thick] (current page.south west) +(6,0.3) -- +(6,8);
+\draw [->,thick] (current page.south west) +(0.3,4) -- +(12,4);	
+\node at ($(current page.south west)+(2,7.5)$) {If $|\lambda_{\max}|<1$};   
+\pause
+\node at ($(current page.south west)+(2.8,1.5)$) {$\colInit{\vec{x}}$};
+\draw[fill] ($(current page.south west)+(3,1.5)$) circle [radius=0.06];
+\pause
+\node at ($(current page.south west)+(6.8,3)$) {$\colTarget{\vec{y}}$};
+\draw[fill] ($(current page.south west)+(7,3)$) circle [radius=0.06];
+\pause
+\draw[fill] ($(current page.south west)+(3.5,3)$) circle [radius=0.06];
+\pause
+\draw[fill] ($(current page.south west)+(4.5,4)$) circle [radius=0.06];
+\pause
+\draw[fill] ($(current page.south west)+(5.7,4.6)$) circle [radius=0.06];
+\pause
+\draw[fill] ($(current page.south west)+(7,4.2)$) circle [radius=0.06];
+\pause
+\draw[fill] ($(current page.south west)+(6.6,3.4)$) circle [radius=0.06];
+\pause
+\draw[fill] ($(current page.south west)+(5.7,3.1)$) circle [radius=0.06];
+\pause
+\draw[fill] ($(current page.south west)+(5.5,3.6)$) circle [radius=0.06];
+\pause
+\draw[fill] ($(current page.south west)+(5.8,4.1)$) circle [radius=0.06];
+\pause 	
+\node at ($(current page.south west)+(8.5,4)$) [anchor=north west] {\includegraphics[scale=0.5]{graphics/who.png}};
+\end{tikzpicture} 	
+\end{frame}
+
+\begin{frame}
+\frametitle{Orbits - What's the Big Deal? (IV)}
+\begin{tikzpicture}[remember picture, overlay]
+\node at ($(current page.south west)+(2,7.5)$) {If$^*$ $|\lambda_{\max}|=1$};   
+\node at (current page.center) {\animategraphics[autoplay,loop,scale=0.5]{25}{Animation/test_(}{1000}{1399}};
+\node at ($(current page.south west)+(1,1)$) [anchor=west] {\small * Assuming dominant eigenvalues are not roots of unity};   
+\end{tikzpicture} 	   
+\end{frame}

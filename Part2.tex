@@ -1,0 +1,65 @@
+\begin{frame}
+\frametitle{Beyond the Boolean Setting}
+\hspace*{2.8cm}
+\begin{itemize}
+\item[1. \xmark] Systems must be concrete and finite state.
+\begin{itemize}
+\item[\cmark]<2-> Then reason about infinite-state systems.
+\end{itemize}
+\item[2. \xmark] Specifications are Boolean - not rich enough.
+\begin{itemize}
+\item[\cmark]<3-> Then allow non-Boolean specifications.
+\end{itemize}
+\item[3. \xmark] What happens with ``yes'' instances?
+\begin{itemize}
+\item[\cmark]<4-> Output some proof/witness of correctness.
+\end{itemize}
+\onslide<5->{
+\begin{tikzpicture}[overlay]
+\node at ($(current page.south west)+(-0.3,4.3)$) [anchor=north west] {\includegraphics[scale=0.3]{graphics/doneTransp.png}};
+\end{tikzpicture}
+}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+ \frametitle{Fantastic Systems {\normalsize and How to Reason About Them}}
+Are we done?
+\onslide<+->
+{\footnotesize
+\begin{itemize}[<+->]
+\item Systems that are too rich do not admit decidable/tractable model-checking, even for simple specifications.
+\begin{itemize}
+	\item e.g., Turing Machines.
+\end{itemize}
+\item Specifications that are too rich do not admit decidable/tractable model-checking, even for simple systems.
+\begin{itemize}
+	\item e.g., Peano Arithmetic.
+\end{itemize}
+\item It is not always clear what a proof/witness means, \\nor whether we can find one. 
+\end{itemize}
+}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Fantastic Systems {\normalsize and How to Reason About Them}}
+	\begin{tikzpicture}[overlay]
+	\node at ($(current page.south west)+(-0.5,3.2)$) [anchor=north west] {\includegraphics[scale=0.31]{graphics/complexity2.png}};
+	\end{tikzpicture} 	
+ \end{frame}
+
+\begin{frame}
+\frametitle{Talk Outline}
+\begin{itemize}
+\item Non-Boolean Reasoning:
+\begin{itemize} 
+    \item[\itemnow] \textbf{\emc{red}{Reasoning about Quality - quantitative specifications.}}
+	\item[\itemlater] Regular Sensing - a new complexity measure for $\omega$-regular languages.
+\end{itemize}
+\item Linear Dynamical Systems: 
+\begin{itemize}
+\item[\itemlater] The Polytope Collision Problem - input quantification in infinite-state systems.
+\item[\itemlater] Semialgebraic invariant synthesis - certifiable algorithms for orbit problems.
+\end{itemize}
+\end{itemize}
+\end{frame}

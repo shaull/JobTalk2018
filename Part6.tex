@@ -1,0 +1,382 @@
+\begin{frame}
+\frametitle{Talk Outline}
+\begin{itemize}
+\item \emc{gray}{Non-Boolean Reasoning:}
+\begin{itemize} 
+    \item \emc{gray}{Reasoning about Quality - quantitative specifications.}
+	\item \emc{gray}{Regular Sensing - a new complexity measure for $\omega$-regular languages.}
+\end{itemize}
+\item Linear Dynamical Systems: 
+\begin{itemize}
+\item[\itemnow] \textbf{\emc{red}{The Polytope Collision Problem - input quantification in infinite-state systems.}}
+\item[\itemlater] Semialgebraic invariant synthesis - certifiable algorithms for orbit problems.
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{The Polytope-Collision Problem}
+	\begin{tikzpicture}[remember picture, overlay]
+	\pause
+	\node at ($(current page.south west)+(1,7)$) [anchor=north west] {{\begin{varwidth}{\linewidth}\begin{itemize}
+			\setlength\itemsep{1.3em}
+			\item<2-> We work in $\RR^d$.
+			\item<3-> Initial polytope $\colInit{\P}$.
+			\item<5-> Target polytope $\colTarget{\Q}$.		
+			\item<6-> Matrix $A\in \RR^{d\times d}$
+			\item<7-> Will the {\em Orbit} of $\colInit{\P}$ hit $\colTarget{\Q}$?
+			\item<8-> i.e. Does there exist $n\in \NN$ such that $A^n\colInit{\P}\cap \colTarget{\Q}\neq \emptyset$?
+			\end{itemize}\end{varwidth}}
+	};
+	
+	\onslide<2->
+	\draw [->,ultra thick] (current page.south west) +(9,3) -- +(9,7.5);
+	\draw [->,ultra thick] (current page.south west) +(6,3.5) -- +(11.5,3.5);
+	\onslide<3>{
+		\node at ($(current page.south west)+(7,4)$) {\includegraphics[scale=0.1]{graphics/carbluet.png}};
+		\node at ($(current page.south west)+(6.9,4)$) {$\colInit{\P}$};
+	}
+	\onslide<4->
+	\node at ($(current page.south west)+(7,4)$) {\includegraphics[scale=0.1]{graphics/polycarT1.png}};
+	\node at ($(current page.south west)+(6.9,4)$) {$\colInit{\P}$};
+	\onslide<5->
+	\node at ($(current page.south west)+(11,6.5)$) {\includegraphics[scale=0.25]{graphics/treeT.png}};
+	\node at ($(current page.south west)+(11,5.15)$) {$\colTarget{\Q}$};
+	\onslide<9->
+	\node at ($(current page.south west)+(7,6)$) {\includegraphics[scale=0.1]{graphics/polycarT2.png}};
+	\node at ($(current page.south west)+(6.9,6)$) {$A\colInit{\P}$};
+	\onslide<10->
+	\node at ($(current page.south west)+(9.5,3.5)$) {\includegraphics[scale=0.1]{graphics/polycarT3.png}};
+	\node at ($(current page.south west)+(9.5,3.5)$) {$A^2\colInit{\P}$};   
+	\onslide<11->
+	\node at ($(current page.south west)+(10.1,6.2)$) {\includegraphics[scale=0.1]{graphics/polycarT4.png}};
+	\node at ($(current page.south west)+(10.1,6)$) {$A^3\colInit{\P}$};   
+	\end{tikzpicture} 	
+\end{frame}
+
+
+
+\begin{frame}
+	\frametitle{Problem and Results}
+	\pause
+	\onslide<+->
+	\begin{beamerboxesrounded}[upper=uppercolblue,lower=lowercolblue,shadow=true]{The Polytope-Collision Problem}
+		Given polytopes $\colInit{\P}, \colTarget{\Q}\subseteq \RR^d$ and a matrix $A\in \QQ^{d\times d}$, decide whether there exists $n\in \NN$ such that $A^n\colInit{\P}\cap \colTarget{\Q}\neq \emptyset$.
+	\end{beamerboxesrounded}
+	\onslide<+->
+	Results 	[S. Almagor, J. Ouaknine, and J. Worrell, \textbf{ICALP 2017}]:
+	\onslide<+->	
+	\begin{beamerboxesrounded}[upper=uppercolgreen,lower=lowercolgreen,shadow=true]{$\Large \emc{black}{\smiley}$ }
+		For $d\le 3$, {\bf decidable} in PSPACE.
+	\end{beamerboxesrounded}	
+	\onslide<+->
+	\begin{beamerboxesrounded}[upper=uppercolred,lower=lowercolred,shadow=true]{\Large $\emc{black}{\frownie}$}
+		For $d\ge 4$, {\bf hard} with respect to long-standing number-theoretic open problems.
+	\end{beamerboxesrounded}
+
+\end{frame}
+
+%\begin{frame}
+%\frametitle{3D Polytope Collision Problem is in PSPACE\\ Proof Outline}
+%\pause
+%\begin{itemize}[<+->]
+%\item \alt<2-6,9->{Reduce to the invertible-matrix case.}{\bf \emc{darkgreen}{Reduce to the invertible-matrix case.}}
+%\item \alt<3-8>{Reason about intersecting polytopes.}{\bf \emc{darkgreen}{Reason about intersecting polytopes.}}
+%\item Formulate the problem as a (symbolic) first-order sentence in the theory of the reals.
+%\item Eliminate quantifiers to get systems of inequalities.
+%\item Solve the systems.
+%\end{itemize}
+%\onslide<8>{
+%	\begin{tikzpicture}[remember picture, overlay]
+%	\node at ($(current page.center) + (0,1.5)$) [anchor=north] {\includegraphics[scale=0.5]{graphics/rabbit.jpg}};
+%	\end{tikzpicture}
+%}
+% \end{frame}
+
+% \begin{frame}
+% \frametitle{Intersection of polytopes}
+% \begin{itemize}
+% \item<1-> Consider {\em tetrahedra} $\colInit{\T_1}$ and $\colTarget{\T_2}$.
+% \item<2-> Observe that $\colInit{\T_1}$ intersects $\colTarget{\T_2}$ iff either of the following holds:
+% \begin{itemize}
+% \item<3-> An edge of $\colInit{\T_1}$ intersects a face of $\colTarget{\T_2}$\onslide<4->{, or \emc{red}{vice versa}.}
+% \item<5-> A vertex of $\colInit{\T_1}$ lies in $\colTarget{\T_2}$\onslide<6->{, or \emc{red}{vice versa}.}
+% \end{itemize}
+% \item<7-> We show that it is enough to solve the following:
+%
+% \begin{beamerboxesrounded}[upper=uppercolblue,lower=lowercolblue,shadow=true]{3DPCP:}
+% 		Given polytopes $\colInit{\P}, \colTarget{\Q}$ in $\RR^3$ and a matrix $A\in \QQ^{3\times 3}$, decide whether there exists $n\in \NN$ such that an \textbf{edge} of $A^n\colInit{\P}$ intersects a \textbf{face} of $\colTarget{\Q}$.
+% 	\end{beamerboxesrounded}
+% \end{itemize}
+%\begin{center}
+%\onslide<3->{\includegraphics[scale=0.22]{graphics/tetra1.png}}
+%\onslide<4->{\includegraphics[scale=0.22]{graphics/tetra2.png}}
+%\onslide<5->{\includegraphics[scale=0.18]{graphics/tetra3.png}}
+%\onslide<6->{\includegraphics[scale=0.18]{graphics/tetra4.png}}
+%\end{center}
+% \end{frame}
+ 
+%\begin{frame}
+% \frametitle{3DPCP is in PSPACE - Proof Outline}
+% \begin{itemize}
+% \item Reduce to the invertible-matrix case.
+% \item Reason about intersecting polytopes.
+% \item {\bf \emc{darkgreen}{Formulate the problem as a (symbolic) first-order sentence in the theory of the reals.}}
+% \item Eliminate quantifiers to get systems of inequalities.
+% \item Solve the systems.
+% \end{itemize}
+%\end{frame}
+
+\begin{frame}
+ \frametitle{3D Polytope Collision Problem - Simplification}
+For the purpose of this talk, we \emc{orange}{assume} the following:
+
+\onslide<2->
+$\emc{orange}{\bullet}$ $\colInit{\P}$ is a \emph{segment}: $\colInit{{\cal P}}= \set{\colInit{\vec{u}}+\lambda \colInit{\vec{v}}: \lambda\in [0,1]}$.
+
+\onslide<3->
+Recall that $A\in \QQ^{3x3}$.
+
+\onslide<4->
+$\emc{orange}{\bullet}$ Assume $A$ is diagonalizable. Then, we can write
+$$A=B\begin{pmatrix}
+\alpha & 0 & 0\\
+0 & \alt<1-5>{\beta}{\conj{\alpha}} & 0\\
+0 &0 & \alt<1-7>{\rho}{|\alpha|}\\
+\end{pmatrix}B^{-1}$$
+\onslide<5->
+$\emc{orange}{\bullet}$ Assume that $\alpha$ is complex, so $\beta=\conj{\alpha}$ \onslide<7->{ and $\rho$ is real with $\rho=|\alpha|$.}
+
+\onslide<9->
+
+$\emc{orange}{\bullet}$ Assume $\gamma=\frac{\alpha}{|\alpha|}$ is \textbf{not} a root of unity.
+
+\onslide<10->
+
+All eigenvalues are {\bf algebraic} numbers.
+\onslide<11->
+
+For every vector $\vec{x}$, we have that 
+$$(A^n\vec{x})_i=a_i \alpha^n+\conj{a_i} \bar{\alpha}^n+b_i |\alpha|^n$$
+\end{frame}
+ 
+ \newcommand{\foR}{{\text{FO}[\RR]}}
+ 
+\begin{frame}
+  \frametitle{Formulating the Problem in FO}
+ 	
+ 	Since $\colInit{{\cal P}}= \set{\colInit{\vec{u}}+\lambda \colInit{\vec{v}}: \lambda\in [0,1]}$, our problem can be written as:
+ 	\onslide<2->
+ 	\begin{beamerboxesrounded}[upper=uppercolblue,lower=lowercolblue,shadow=true]{3DPCP - simplification rewrite:}
+ 			Does there exist $n\in \NN$ such that the following sentence is true:
+ 			$\exists \lambda : $ $0\le \lambda\le 1\ \wedge A^n \colInit{\vec{u}}+\lambda A^n\colInit{\vec{v}}\in \colTarget{{\cal Q}}$
+ 		\end{beamerboxesrounded}
+	\onslide<3->
+	If $n$ is fixed, this is$^{*}$ a sentence in the \emph{first order theory of the reals}!
+	\onslide<4->
+	\begin{center}
+	 	\includegraphics[scale=0.3]{graphics/detour.jpg}
+	\end{center}
+
+  \end{frame}
+  
+\begin{frame}
+	\frametitle{First Order Theory of the Reals -- Crash Course}
+	\begin{itemize}[<+->]
+		\item A sentence in $\foR$ consists of:
+		\begin{itemize}
+			\item Real-valued variables, possible quantified.
+			\item Boolean operators (i.e., $\wedge,\vee,\neg$).
+			\item Predicates of the form $p(x_1,\ldots,x_n)>0$ where $p$ is a polynomial with \emph{rational} coefficients.
+		\end{itemize}
+	\item Example: $\exists x : x^2+ 2x-1 >0 \wedge x>0$
+	\item Admits \textbf{Quantifier Elimination}:
+	
+	\begin{beamerboxesrounded}[upper=uppercollem,lower=lowercollem,shadow=true]{$\foR$ Quantifier Elimination [Tarski-–Seidenberg]}
+		Every $\foR$ sentence can be transformed to an equivalent quantifier-free sentence.
+	\end{beamerboxesrounded}
+
+	\item Examples:
+	\begin{itemize}
+		\item The sentence above is equivalent to \emph{True}.
+		\item $\exists x: ax^2+bx+c=0$ is equivalent to $b^2-4ac\ge 0$.
+	\end{itemize}
+	\end{itemize}
+\end{frame}
+  
+  \begin{frame}
+  	\frametitle{Formulating the Problem in FO}
+  	
+  	Since $\colInit{{\cal P}}= \set{\colInit{\vec{u}}+\lambda \colInit{\vec{v}}: \lambda\in [0,1]}$, our problem can be written as:
+  	\begin{beamerboxesrounded}[upper=uppercolblue,lower=lowercolblue,shadow=true]{3DPCP - simplification rewrite:}
+  		Does there exist $n\in \NN$ such that the following sentence is true:
+  		\alt<1-6>{$\exists \lambda : $ $0\le \lambda\le 1\ \wedge A^n \colInit{\vec{u}}+\lambda A^n\colInit{\vec{v}}\in \colTarget{{\cal Q}}$}{$\exists \emc{red}{\lambda} : $ $0\le \emc{red}{\lambda}\le 1\ \wedge A^n \colInit{\vec{u}}+\emc{red}{\lambda} A^n\colInit{\vec{v}}\in \colTarget{{\cal Q}}$}
+  	\end{beamerboxesrounded}
+  	If $n$ is fixed, this is$^{*}$ a sentence in $\foR$!
+  	\only<1>{
+  		\begin{center}
+  		\includegraphics[scale=0.7]{graphics/enddetour.jpg}
+  	\end{center}}
+  
+	  \onslide<2->
+	  Recall: every coordinate of $A^n \colInit{\vec{u}}$ (or $A^n\colInit{\vec{v}}$) is of the form:
+	  $$(A^n\vec{u})_i=a_i \alpha^n+\conj{a_i} \bar{\alpha}^n+b_i |\alpha|^n$$
+	  
+	\begin{itemize}
+	  \item<3-> Admits quantifier elimination.
+	  \item<4-> However, we need to eliminate quantifiers \emc{darkgreen}{symbolically},\\ since $n$ is a parameter.
+	  \item<5-> The CAD algorithm is very complicated to analyze.
+	  \item<6-> Notice that the expressions above are \emc{red}{linear}!
+	  \item<8-> We can symbolically apply Fourier-Motzkin elimination.
+	\end{itemize}		
+  \end{frame}
+	
+ \begin{frame}
+	\frametitle{Fourier-Motzkin Elimination Result (Partial)}
+	\begin{tikzpicture}[remember picture, overlay]
+	\node at ($(current page.center)+(0,-0.5)$)[anchor=center] {
+		\includegraphics[scale=0.6]{graphics/FMResult.png}
+	};
+	\end{tikzpicture}
+\end{frame}
+
+ \begin{frame}
+ \frametitle{Fourier-Motzkin Elimination Result}
+	Recall: every coordinate of $A^n \colInit{\vec{u}}$ (or $A^n\colInit{\vec{v}}$) is of the form:
+	\vspace*{-8pt}
+	$$(A^n\vec{u})_i=a_i \alpha^n+\conj{a_i} \bar{\alpha}^n+b_i |\alpha|^n$$
+	\vspace*{-15pt}
+
+	\onslide<2->
+	Eliminating $\lambda$ from $A^n\colInit{\vec{u}}+\lambda A^n\colInit{\vec{v}}$ results (after normalization) in a quadratic expression:
+	\onslide<3->
+	
+	\begin{beamerboxesrounded}[upper=uppercolblue,lower=lowercolblue,shadow=true]{Theorem:}
+	The sentence is equivalent to finding the solution (i.e., $n\in\NN$) to a conjunction of expressions of the form
+	\vspace*{-8pt}
+	\begin{align*}
+		& B \gamma^{2n}+ \conj{B}\conj{\gamma}^{2n}+C\gamma^n+\conj{C}\conj{\gamma}^n+D+r(n)>0 \\
+	\end{align*}
+	
+	\vspace*{-25pt}
+	with $r(n)\to 0$ exponentially fast, and $\gamma=\frac{\alpha}{|\alpha|}$ is not a root of unity.
+ 	\end{beamerboxesrounded}
+ 	
+ 	\onslide<4>{
+ 	 		\begin{tikzpicture}[remember picture, overlay]
+ 	 			\node at ($(current page.center)+(0,-0.7)$)[anchor=center] {\includegraphics[scale=0.5]{graphics/believe.jpg}};
+ 	 			\end{tikzpicture}
+ 	 	}
+ 	 \onslide<5-> 
+ 	  	Solving this is our main technical challenge \\
+ 	  	(i.e., finding $n\in \NN$ that satisfies all the expressions).
+ \end{frame}
+
+%\begin{frame}
+%	\frametitle{Solution Sketch}
+%	\begin{beamerboxesrounded}[upper=uppercolblue,lower=lowercolblue,shadow=true]{A conjunction of expressions of the form:}
+%	\vspace*{-15pt}
+%	\begin{align*}
+%		& B \gamma^{2n}+ \conj{B}\conj{\gamma}^{2n}+C\gamma^n+\conj{C}\conj{\gamma}^n+D+r(n)>0
+%	\end{align*}
+%	\vspace*{-20pt}
+%	
+%		with $r(n)\to 0$ exponentially fast, and $\gamma=\frac{\alpha}{|\alpha|}$ is not a root of unity.
+%	\end{beamerboxesrounded}
+%	\onslide<+->
+%	\begin{beamerboxesrounded}[upper=uppercolgreen,lower=lowercolgreen,shadow=true]{Main Lemma (Intuitive Version):}
+%		We can drop $r(n)$ in the above, after some $N\in \NN$.
+%	\end{beamerboxesrounded}
+%\end{frame}
+
+
+\begin{frame}
+ \frametitle{Solution Sketch}
+	 	\onslide<+->
+		\begin{beamerboxesrounded}[upper=uppercolblue,lower=lowercolblue,shadow=true]{}
+			\vspace*{-15pt}
+			\begin{align*}
+			& B \emc{red}{\gamma^{2n}}+ \conj{B}\emc{red}{\conj{\gamma}^{2n}}+C\emc{red}{\gamma^n}+\conj{C}\emc{red}{\conj{\gamma}^n}+D+r(n)>0
+			\end{align*}
+			
+			\vspace*{-20pt}
+			with $r(n)\to 0$ exponentially fast, and $\emc{red}{\gamma}=\frac{\alpha}{|\alpha|}$ is not a root of unity.
+		\end{beamerboxesrounded}
+		\onslide<+->
+		\begin{beamerboxesrounded}[upper=uppercolgreen,lower=lowercolgreen,shadow=true]{Main Lemma (Intuitive Version):}
+			We can drop $r(n)$ in the above, after some $N\in \NN$.
+		\end{beamerboxesrounded}
+	 	\onslide<+->
+	 	$\set{\emc{red}{\gamma^n}:n\in \NN}$ is dense in the unit circle $\set{z\in \CC: |z|=1}$.\\
+	 	\onslide<+->
+	 	Consider $f:\CC\to \RR$ defined by $f(\emc{blue}{z})=B \emc{blue}{z^2}+ \conj{B}\emc{blue}{\conj{z}^{2}}+C\emc{blue}{z}+\conj{C}\emc{blue}{\conj{z}}+D$.\\
+	 	\onslide<+->
+		$f$ has \emc{blue}{$4$ roots} on the unit circle. How close does $\emc{red}{\gamma^n}$ get to them?
+		\begin{center}
+		\begin{tikzpicture}
+			 	%\draw [->,thick] (current page.south west) +(6,0.3) -- +(6,8);
+			 	%\draw [->,thick] (current page.south west) +(0.3,4) -- +(12,4);	
+		 		%\fill[red!20!white] ($(current page.center)+(-6.6,1.52)$) rectangle ($(current page.center)+(4.65,-2.2)$);
+		 		\draw[gray] ($(current page.center)+(-1.2,0)$) -- ($(current page.center)+(1.2,0)$);
+		 		\draw[gray] ($(current page.center)+(0,1.2)$) -- ($(current page.center)+(0,-1.2)$);
+		 		\draw ($(current page.center)$) circle [radius=1.2];
+		 		%\draw[step=1,black,very thin] ($(current page.center)+(-8,-6)$) grid ($(current page.center)+(4,4)$);
+				\draw[fill,blue] ($(current page.center)+(60:1.2)$) circle [radius=0.1];
+				\draw[fill,blue] ($(current page.center)+(130:1.2)$) circle [radius=0.1];
+				\draw[fill,blue] ($(current page.center)+(210:1.2)$) circle [radius=0.1];
+				\draw[fill,blue] ($(current page.center)+(250:1.2)$) circle [radius=0.1];
+		 		\foreach \a in {1,...,7}
+			 		{
+			 		\pause
+			 		\draw[fill,red] ($(current page.center)+(75*\a:1.2)$) circle [radius=0.1];
+			 		}
+		\end{tikzpicture} 		
+		\end{center}
+			 	
+		
+ \end{frame}
+
+\begin{frame}
+ \frametitle{Separating Powers}
+	 	\onslide<+->
+	 	\begin{beamerboxesrounded}[upper=uppercolred,lower=lowercolred,shadow=true]
+	 	%{Lemma [J.Ouaknine and J.Worrell, ICALP 2014]}
+	 	{Lemma [Consequence of the Baker-W\"ustholz Theorem]:}
+	 		There exists $D\in \NN$ such that for every $\emc{red}{\zeta},\emc{blue}{\xi}\in \AA$ of modulus 1, if $\emc{red}{\zeta}^n\neq \emc{blue}{\xi}$, then $|\emc{red}{\zeta}^n-\emc{blue}{\xi}|>n^{-(\norm{\emc{red}{\zeta}}+\norm{\emc{blue}{\xi}})^D}$.	 							
+	 	\end{beamerboxesrounded}
+	 	% % % % % % % % % % % %
+		\onslide<+->
+	 	\begin{tikzpicture}
+	 	%\draw [->,thick] (current page.south west) +(6,0.3) -- +(6,8);
+	 	%\draw [->,thick] (current page.south west) +(0.3,4) -- +(12,4);	
+ 		\fill[green!20!white] ($(current page.center)+(-6.6,1.52)$) rectangle ($(current page.center)+(4.3,-2.2)$);
+ 		\draw[gray] ($(current page.center)+(-3.5,-0.5)$) -- ($(current page.center)+(0.5,-0.5)$);
+ 		\draw[gray] ($(current page.center)+(-1.5,-2.2)$) -- ($(current page.center)+(-1.5,1.5)$);
+ 		\draw ($(current page.center)+(-1.5,-0.5)$) circle [radius=1.5];
+ 		%\draw[step=1,black,very thin] ($(current page.center)+(-8,-6)$) grid ($(current page.center)+(4,4)$);
+		\draw[fill,blue] ($(current page.center)+(-1.5,-0.5)+(60:1.5)$) circle [radius=0.1];
+ 		\node at ($(current page.center)+(-1.5,-0.5)+(60:1.75)$) {$\emc{blue}{\xi}$};
+ 		\onslide<+->
+ 		\draw[fill,red] ($(current page.center)+(-1.5,-0.5)+(15:1.5)$) circle [radius=0.1];
+ 		\node at ($(current page.center)+(-1.5,-0.5)+(15:1.75)$) {$\emc{red}{\zeta}$};
+ 		\draw[orange] ($(current page.center)+(-1.5,-0.5)+(15:1.5)$) -- ($(current page.center)+(-1.5,-0.5)+(60:1.5)$);
+ 		\onslide<+->
+		\draw[fill,red] ($(current page.center)+(-1.5,-0.5)+(90:1.5)$) circle [radius=0.1];
+ 		\node at ($(current page.center)+(-1.5,-0.5)+(90:1.75)$) {$\emc{red}{\zeta^2}$};
+ 		\draw[orange] ($(current page.center)+(-1.5,-0.5)+(90:1.5)$) -- ($(current page.center)+(-1.5,-0.5)+(60:1.5)$);
+ 		\onslide<+->
+		\draw[fill,red] ($(current page.center)+(-1.5,-0.5)+(165:1.5)$) circle [radius=0.1];
+ 		\node at ($(current page.center)+(-1.5,-0.5)+(165:1.75)$) {$\emc{red}{\zeta^3}$}; 	
+ 		\draw[orange] ($(current page.center)+(-1.5,-0.5)+(165:1.5)$) -- ($(current page.center)+(-1.5,-0.5)+(60:1.5)$);
+ 		\onslide<+->
+		\draw[fill,red] ($(current page.center)+(-1.5,-0.5)+(45:1.5)$) circle [radius=0.1];
+ 		\node at ($(current page.center)+(-1.5,-0.5)+(45:1.75)$) {$\emc{red}{\zeta^n}$};
+ 		\draw[orange] ($(current page.center)+(-1.5,-0.5)+(45:1.5)$) -- ($(current page.center)+(-1.5,-0.5)+(60:1.5)$);
+ 		%\draw[fill] ($(current page.center)$) circle [radius=0.3];
+	 	\end{tikzpicture} 		
+	 	
+	 	% % % % % % % % % % % % 
+ 		\onslide<7->{
+		Also starring: symbolic Taylor approximations, decidability of $\foR$, root-separation bounds, and PosSLP.}
+ 
+ \end{frame}
